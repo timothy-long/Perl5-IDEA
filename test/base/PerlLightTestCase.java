@@ -108,6 +108,7 @@ import com.perl5.lang.perl.idea.codeInsight.controlFlow.PerlAssignInstruction;
 import com.perl5.lang.perl.idea.codeInsight.controlFlow.PerlControlFlowBuilder;
 import com.perl5.lang.perl.idea.configuration.settings.PerlLocalSettings;
 import com.perl5.lang.perl.idea.codeInsight.controlFlow.PerlIterateInstruction;
+import com.perl5.lang.perl.idea.codeInsight.controlFlow.*;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.idea.intellilang.PerlInjectionMarkersService;
 import com.perl5.lang.perl.idea.manipulators.PerlBareStringManipulator;
@@ -1282,7 +1283,9 @@ public abstract class PerlLightTestCase extends LightCodeInsightFixtureTestCase 
     for (Instruction instruction : flow.getInstructions()) {
       printInstruction(builder, instruction);
 
-      if (instruction instanceof PartialConditionalInstructionImpl) {
+      if (instruction instanceof PerlIteratorConditionInstruction) {
+      }
+      else if (instruction instanceof PartialConditionalInstructionImpl) {
         builder.append("\n").append("Its ").append(((PartialConditionalInstructionImpl)instruction).getResult()).
           append(" branch, condition: ").append(((PartialConditionalInstructionImpl)instruction).getConditionText());
       }
